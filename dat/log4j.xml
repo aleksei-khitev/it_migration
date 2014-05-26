@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration>
+  <appender name="LOG-MAIN" class="org.apache.log4j.FileAppender">
+    <param name="file" value="log/it-migration.log"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{ISO8601} [%5p] %c %m at %l%n"/>
+    </layout>
+  </appender>
+   <appender name="LOG-SSH-INSTALLER" class="org.apache.log4j.FileAppender">
+    <param name="file" value="log/ssh-and-installer.log"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{ISO8601} [%5p] %c %m at %l%n"/>
+    </layout>
+  </appender> 
+  <appender name="LOG-SAMBA" class="org.apache.log4j.FileAppender">
+    <param name="file" value="log/samba.log"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{ISO8601} [%5p] %c %m at %l%n"/>
+    </layout>
+  </appender> 
+  <appender name="LOG-AD" class="org.apache.log4j.FileAppender">
+    <param name="file" value="log/ad.log"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{ISO8601} [%5p] %c %m at %l%n"/>
+    </layout>
+  </appender> 
+      
+  <category name="ru.akhitev.it_migration.ad_migration" additivity="false">
+    <priority value="INFO"/>
+    <appender-ref ref="LOG-MAIN"/>
+  </category>
+  <category name="ru.akhitev.it_migration.ad_migration.installer" additivity="false">
+    <priority value="INFO"/>
+    <appender-ref ref="LOG-SSH-INSTALLER"/>
+  </category>
+  <category name="ru.akhitev.it_migration.ad_migration.samba" additivity="false">
+    <priority value="INFO"/>
+    <appender-ref ref="LOG-SAMBA"/>
+  </category>
+  <category name="ru.akhitev.it_migration.ad_migration.ad" additivity="false">
+    <priority value="INFO"/>
+    <appender-ref ref="LOG-AD"/>
+  </category>
+  <category name="org.springframework" additivity="false">
+    <priority value="INFO"/>
+    <appender-ref ref="LOG-MAIN"/>
+  </category>  
+	<root> 
+		<priority value ="debug" /> 
+		<appender-ref ref="LOG-MAIN" /> 
+	</root> 
+</log4j:configuration>

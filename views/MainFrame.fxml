@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.TitledPane?>
+<!--
+Ссылка на css:
+<stylesheets>
+	<URL value="@..." />
+</stylesheets>
+
+В описании GridPane:
+	fx:controller="..." - ссылка на класс-контроллер
+	vgap - Отступы между строками GridPane
+	hgap - Отступы между столбцами GridPane
+	styleClass="..." - указание на класс из css
+Для элементов GripPane:
+	GridPane.rowIndex=... - номер строки минус 1 в GridPane
+	GridPane.columnIndex=... - номер столбца минус 1 в GridPane
+	GridPane.columnSpan=... - количество объединяемых ячеек по столбцам
+-->
+<VBox id="vbox"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="ru.akhitev.it_migration.gui.MainFrameController">
+      	<MenuBar fx:id="menuBar" onKeyPressed="#handleKeyInput">
+		<menus>
+			<Menu text="%file">
+				<items>
+					<MenuItem text="%propertiesToDefault"/>
+					<MenuItem text="%saveConf"/>
+					<MenuItem text="%loadConf"/>
+					<SeparatorMenuItem  />
+					<MenuItem text="%exit"/>
+				</items>
+			</Menu>
+			<Menu text="%prepare">
+				<items>
+					<MenuItem text="%installSamba"/>
+					<MenuItem text="%backUpSmbConf"/>
+					<MenuItem text="%makeSmbConf"/>
+				</items>
+			</Menu>
+			<Menu text="%data">
+				<items>
+					<MenuItem text="%saveAD"/>
+					<MenuItem text="%loadAD"/>
+				</items>
+			</Menu>
+			<Menu text="%help">
+				<items>
+					<MenuItem text="%userGuide"/>
+					<MenuItem text="%devGuide"/>
+					<MenuItem text="%javaDoc"/>
+					<SeparatorMenuItem />
+					<MenuItem text="%about" onAction="#handleAboutAction"/>
+				</items>
+			</Menu>
+		</menus>
+	</MenuBar>
+	<Text id="title" text="%mainTitle"/>
+	<GridPane xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10" styleClass="root">
+		<TitledPane text="%adTitle"  GridPane.columnIndex="0" GridPane.rowIndex="0">
+			<content>
+				<GridPane xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10" styleClass="root">
+					<padding><Insets top="20" right="20" bottom="10" left="20"/></padding> 
+					<Label text="%adDomainLabel" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+					<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" minHeight="20"/>
+					<Label text="%adHostLabel" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+					<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" minHeight="20"/>
+					<Label text="%adPortLabel" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+					<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" minHeight="20"/>
+					<Label text="%adUserNameLabel" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+					<TextField GridPane.columnIndex="1" GridPane.rowIndex="3" minHeight="20"/>						
+				    <Label text="%adPassLabel" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+				    <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="4" minHeight="20"/>
+				</GridPane>
+			</content>       	
+		</TitledPane>
+		<TitledPane text="%smbTitle"  GridPane.columnIndex="1" GridPane.rowIndex="0">
+			<content>		
+				<GridPane xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10" styleClass="root">
+					<padding><Insets top="20" right="20" bottom="10" left="20"/></padding> 
+					<Label text="%smbDomainLabel" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+					<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" minHeight="20"/>
+					<Label text="%smbHostLabel" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+					<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" minHeight="20"/>
+					<Label text="%smbPortLabel" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+					<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" minHeight="20"/>
+					<Label text="%smbUserNameLabel" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+					<TextField GridPane.columnIndex="1" GridPane.rowIndex="3" minHeight="20"/>						
+				    <Label text="%smbPassLabel" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+				    <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="4" minHeight="20"/>
+				</GridPane> 
+			</content> 	      	
+		</TitledPane>        	
+		<TitledPane text="%sshTitle"  GridPane.columnIndex="0" GridPane.rowIndex="1">
+			<content>		
+				<GridPane xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10" styleClass="root">
+					<padding><Insets top="20" right="20" bottom="10" left="20"/></padding> 
+					<Label text="%sshHostLabel" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+					<TextField fx:id="sship" GridPane.columnIndex="1" GridPane.rowIndex="0" minHeight="20"/>
+					<Label text="%sshPortLabel" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+					<TextField fx:id="sshport" GridPane.columnIndex="1" GridPane.rowIndex="1" minHeight="20"/>
+					<Label text="%sshUserNameLabel" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+					<TextField fx:id="sshuname" GridPane.columnIndex="1" GridPane.rowIndex="2" minHeight="20"/>
+				    <Label text="%sshPassLabel" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+				    <PasswordField fx:id="sshupass" GridPane.columnIndex="1" GridPane.rowIndex="3" minHeight="20"/>
+					<HBox GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2">
+				        <Button fx:id="sshconbtn" text="%sshStartButtonText" onAction="#handleConDisconSsh"/>
+				        <Button text="%sambaStartButtonText" onAction="#handleInstallSamba"/>
+					</HBox>					    
+				</GridPane> 
+			</content> 	      	
+		</TitledPane>   
+		<TitledPane text="%frameLogTitle"  GridPane.columnIndex="1" GridPane.rowIndex="1">
+			<content>
+	    		<TextArea fx:id="frameLog"  prefWidth="100">
+	    		</TextArea>
+			</content>       	
+		</TitledPane>
+    <TitledPane text="%consoleTitle"  GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="2">
+    	<content>
+    		<VBox>
+	    		<TextArea fx:id="actiontarget">
+	    		
+	    		</TextArea>
+	    		<HBox>
+	    			<Label fx:id="terminallabel" text="%terminalLabelDefaultText"/>
+	    			<TextField fx:id="terminalinline" onAction="#onEnter"/>
+	    		</HBox>
+    		</VBox>
+    	</content>
+    </TitledPane>
+    <!-- Панель с кнопками управления -->
+	<HBox spacing="10" alignment="bottom_right" GridPane.columnIndex="0" GridPane.rowIndex="3">
+        <Button text="%startButtonText" onAction="#handleSubmitButtonAction"/>
+	</HBox>	
+		</GridPane>
+	<stylesheets>
+		<URL value="@styles.css" />
+	</stylesheets>
+ 
+
+</VBox>

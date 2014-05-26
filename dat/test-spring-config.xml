@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+<bean id="ssh-manager" class="ru.akhitev.it_migration.ad_migration.ssh.JcraftSshManagerImpl" factory-method="getInstance">
+    <property name="timeOut" value="6000"/>
+    <property name="userName" value="localroot"/>
+    <property name="password" value="Tie_Interceptor"/>
+    <property name="port" value="22"/>
+    <property name="host" value="192.168.101.101"/>
+</bean>
+<bean id="samba-installer" class="ru.akhitev.it_migration.ad_migration.installer.SmbInstallerImpl">
+    <property name="sshManager" ref="ssh-manager"/>
+</bean>
+<bean id="ad-manager" class="ru.akhitev.it_migration.ad_migration.ldap.ActDirLdapManagerImpl">
+    <property name="server" value="10.0.2.3"/>
+    <property name="portNumber" value="389"/>
+    <property name="adminLogin" value="Administrator"/>
+    <property name="adminPass" value="Tie_Interceptor"/>
+    <property name="domainName" value="testdomain.local"/>
+    <property name="isSsl" value="false"/>
+</bean>
+<bean id="contextSource"
+    class="org.springframework.ldap.core.support.LdapContextSource">
+    <property name="url" value="ldap://10.0.2.3:389" />
+    <property name="base" value="DC=testdomain,DC=local" />
+    <property name="userDn" value="CN=Administrator,CN=Users,DC=testdomain,DC=local" />
+    <property name="password" value="Tie_Interceptor" />
+</bean>
+<bean id="ldapTemplate" class="org.springframework.ldap.core.LdapTemplate">
+    <constructor-arg ref="contextSource" />
+</bean>
+</beans>
