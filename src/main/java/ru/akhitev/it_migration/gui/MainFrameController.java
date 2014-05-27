@@ -41,6 +41,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import ru.akhitev.it_migration.Configurator;
+import ru.akhitev.net.ssh.ISshClient;
+import ru.akhitev.net.ssh.SshClientJcraftImpl;
 
 public class MainFrameController implements Initializable{
     private static final Logger logger = Logger.getLogger(MainFrameController.class);
@@ -95,7 +97,12 @@ public class MainFrameController implements Initializable{
     //Набор методов обработки соединения с сервером SSH
     @FXML
     public void handleConDisconSsh(){
-        if(!Configurator.getSshClient().isInitSession()){
+        if(Configurator.getSshClient()==null){
+            Configurator.getSshClient().setHost(sship.getText());
+            Configurator.getSshClient().setPort(Integer.parseInt(sshport.getText()));
+            Configurator.getSshClient().setUserName(sshuname.getText());
+        }
+        if(!Configurator.getSshClient().isSessionInit()){
             Configurator.getSshClient().setUserName(sshuname.getText());
             Configurator.getSshClient().setPassword(sshupass.getText());
             Configurator.getSshClient().setPort(Integer.parseInt(sshport.getText()));
@@ -109,21 +116,24 @@ public class MainFrameController implements Initializable{
             logger.info(bundle.getString("sshDisconnected"));
             frameLog.appendText(bundle.getString("sshDisconnected")+"\r\n");
             terminallabel.setText(bundle.getString("terminalLabelDefaultText"));
+            sshconbtn.setText(bundle.getString("sshStartButtonText"));
         }else{
             Configurator.getSshClient().openConnection();
             logger.info("Соединение SSH установленно");
             frameLog.appendText("Соединение SSH установленно\r\n");
             terminallabel.setText(Configurator.getSshClient().getUserName()+"@"+Configurator.getSshClient().getHost()+" $");
+            sshconbtn.setText(bundle.getString("sshStopButtonText"));
         }
     }
     @FXML
     public void onEnter(){
+
         if(Configurator.getSshClient()==null){
             logger.info("Менеджер SSH не инициализирован");
             frameLog.appendText("Менеджер SSH не инициализирован\r\n");
             return;
         }
-        if(!Configurator.getSshClient().isInitSession()){
+        if(!Configurator.getSshClient().isSessionInit()){
             logger.info("Сессия SSH не инициализирована");
             frameLog.appendText("Сессия SSH не инициализирована\r\n");
             return;
@@ -138,7 +148,7 @@ public class MainFrameController implements Initializable{
     public void handleInstallSamba(){
         //sshManager = (SshManager)springXmlAppContext.getBean("ssh-manager");
         Configurator.getNixInstaller().isSupported("ubuntu", "12.04", "samba");
-        //Configurator.getNixInstaller().setSshClient(sshClient);
+        //Configurator.getNixInstaller().setSshClient(Configurator.getSshClient());
         Configurator.getNixInstaller().setGuiLoggerFX(frameLog);
         Configurator.getNixInstaller().setTerminalAreaFX(actiontarget);
         Configurator.getNixInstaller().install();
