@@ -40,9 +40,7 @@ import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
-import ru.akhitev.installer.nix.INixInstaller;
 import ru.akhitev.it_migration.Configurator;
-import ru.akhitev.net.ssh.ISshClient;
 
 public class MainFrameController implements Initializable{
     private static final Logger logger = Logger.getLogger(MainFrameController.class);
@@ -69,6 +67,10 @@ public class MainFrameController implements Initializable{
     private TextArea frameLog;
     @FXML
     private Text title;
+    @FXML
+    private PasswordField adupass;
+    @FXML
+    private PasswordField sambaupass;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         bundle = resources;
@@ -137,8 +139,8 @@ public class MainFrameController implements Initializable{
         //sshManager = (SshManager)springXmlAppContext.getBean("ssh-manager");
         Configurator.getNixInstaller().isSupported("ubuntu", "12.04", "samba");
         //Configurator.getNixInstaller().setSshClient(sshClient);
-        //Configurator.getNixInstaller().setGuiLogger(frameLog);
-        //installer.setTerminalArea(actiontarget);
+        Configurator.getNixInstaller().setGuiLoggerFX(frameLog);
+        Configurator.getNixInstaller().setTerminalAreaFX(actiontarget);
         Configurator.getNixInstaller().install();
     }
 

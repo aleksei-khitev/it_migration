@@ -5,7 +5,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.scene.control.TitledPane?>
 <!--
 Ссылка на css:
 <stylesheets>
@@ -75,7 +74,7 @@
 					<Label text="%adUserNameLabel" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
 					<TextField GridPane.columnIndex="1" GridPane.rowIndex="3" minHeight="20"/>						
 				    <Label text="%adPassLabel" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-				    <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="4" minHeight="20"/>
+				    <PasswordField fx:id="adupass" GridPane.columnIndex="1" GridPane.rowIndex="4" minHeight="20"/>
 				</GridPane>
 			</content>       	
 		</TitledPane>
@@ -92,7 +91,7 @@
 					<Label text="%smbUserNameLabel" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
 					<TextField GridPane.columnIndex="1" GridPane.rowIndex="3" minHeight="20"/>						
 				    <Label text="%smbPassLabel" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-				    <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="4" minHeight="20"/>
+				    <PasswordField fx:id="sambaupass" GridPane.columnIndex="1" GridPane.rowIndex="4" minHeight="20"/>
 				</GridPane> 
 			</content> 	      	
 		</TitledPane>        	
