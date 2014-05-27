@@ -17,32 +17,15 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package ru.akhitev.it_migration;
+package ru.akhitev.it_migration.gui.localization;
 
-import java.io.File;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
-public class Launcher extends Application {
-
-    public static void main( String[] args )
-    {
-        Application.launch(Launcher.class, args);
-    }
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        Configurator.loadClassesFromSpring();
-        Parent root = FXMLLoader.load(
-                (new File(Configurator.getFXMLS_PATH())).toURI().toURL(),
-                Configurator.getLocalizator().getLocalizationResource());
-        Scene scene = new Scene(root, 800, 650);
-        primaryStage.setTitle("IT_migraion");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
+/**
+ * Created by hitev on 27.05.14.
+ */
+public interface ILocalizator {
+    public void setLocale(String locale);
+    public ResourceBundle getLocalizationResource();
 }
