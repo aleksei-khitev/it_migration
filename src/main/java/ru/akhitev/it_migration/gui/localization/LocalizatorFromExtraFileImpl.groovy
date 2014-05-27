@@ -22,15 +22,24 @@ package ru.akhitev.it_migration.gui.localization
 import ru.akhitev.it_migration.Configurator
 
 /**
- * Created by hitev on 27.05.14.
+ * The interface for localization
+ *
+ * @author Aleksei Khitev (alexkhitev@gmail.com)
  */
 class LocalizatorFromExtraFileImpl implements ILocalizator {
+    /**
+     * The locale of application
+     */
     String locale
 
+    /**
+     * The method used for getting locale's bundle
+     * @return
+     */
     ResourceBundle getLocalizationResource(){
-        File file = new File(Configurator.LOCALIZATION_PATH);
-        URL[] urls = [file.toURI().toURL()];
-        ClassLoader loader = new URLClassLoader(urls);
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("local", new Locale(locale), loader)
+        File file = new File(Configurator.LOCALIZATION_PATH) // Setting path to locale's bundle
+        URL[] urls = [file.toURI().toURL()] // Translating the path to URL format
+        ClassLoader loader = new URLClassLoader(urls) // Creating classloader for bundle
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("local", new Locale(locale), loader) // taking bundle
     }
 }

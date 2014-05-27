@@ -23,9 +23,20 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
- * Created by hitev on 27.05.14.
+ * The interface for localization
+ *
+ * @author Aleksei Khitev (alexkhitev@gmail.com)
  */
 public interface ILocalizator {
+    /**
+     * The method used for setting locale
+     * @param locale
+     */
     public void setLocale(String locale);
+
+    /**
+     * The method used for getting locale's bundle
+     * @return
+     */
     public ResourceBundle getLocalizationResource();
 }

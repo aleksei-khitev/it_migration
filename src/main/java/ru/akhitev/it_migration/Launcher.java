@@ -27,22 +27,36 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * The Launcher class
+ *
+ * @author Aleksei Khitev (alexkhitev@gmail.com)
+ */
 public class Launcher extends Application {
 
+    /**
+     * Main method for launching an application
+     * @param args
+     */
     public static void main( String[] args )
     {
         Application.launch(Launcher.class, args);
     }
 
+    /**
+     * Th method used for starting GUI processing
+     * @param primaryStage
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Configurator.loadClassesFromSpring();
+        Configurator.loadClassesFromSpring(); // Initialising spring loading
         Parent root = FXMLLoader.load(
                 (new File(Configurator.getFXMLS_PATH())).toURI().toURL(),
-                Configurator.getLocalizator().getLocalizationResource());
-        Scene scene = new Scene(root, 800, 650);
-        primaryStage.setTitle("IT_migraion");
+                Configurator.getLocalizator().getLocalizationResource()); // Setting a root of javafx
+        Scene scene = new Scene(root, 800, 650); // Setting an resolution of scene
+        primaryStage.setTitle("IT_migraion"); // Setting title
         primaryStage.setScene(scene);
-        primaryStage.show();
+        primaryStage.show(); // Showing
     }
 }

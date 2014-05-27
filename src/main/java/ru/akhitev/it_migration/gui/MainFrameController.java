@@ -24,8 +24,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import org.apache.log4j.Logger;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
-
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,9 +39,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import ru.akhitev.it_migration.Configurator;
-import ru.akhitev.net.ssh.ISshClient;
-import ru.akhitev.net.ssh.SshClientJcraftImpl;
 
+/**
+ * The Controller for MainFrame.fxml
+ *
+ * @author Aleksei Khitev (alexkhitev@gmail.com)
+ */
 public class MainFrameController implements Initializable{
     private static final Logger logger = Logger.getLogger(MainFrameController.class);
     private ResourceBundle bundle;
@@ -77,14 +78,17 @@ public class MainFrameController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         bundle = resources;
     }
+    // TODO Доделать
     @FXML
     protected void handleSubmitButtonAction(ActionEvent event){
 
     }
+    // TODO Доделать
     @FXML
     private void handleAboutAction(final ActionEvent event){
         provideAboutFunctionality();
     }
+    // TODO Доделать
     @FXML
     private void handleKeyInput(final InputEvent event){
         if (event instanceof KeyEvent){
@@ -94,7 +98,9 @@ public class MainFrameController implements Initializable{
             }
         }
     }
-    //Набор методов обработки соединения с сервером SSH
+    /**
+     * The method used for starting and stopping a ssh connection
+     */
     @FXML
     public void handleConDisconSsh(){
         if(Configurator.getSshClient()==null){
@@ -125,6 +131,10 @@ public class MainFrameController implements Initializable{
             sshconbtn.setText(bundle.getString("sshStopButtonText"));
         }
     }
+
+    /**
+     * The method used for catching command from ssh 'command promt'
+     */
     @FXML
     public void onEnter(){
 
@@ -142,8 +152,7 @@ public class MainFrameController implements Initializable{
         actiontarget.appendText(Configurator.getSshClient().executeCommand(terminalinline.getText()));
         terminalinline.setText("");
     }
-    // Установка SAMBA
-
+    // TODO Все переделать
     @FXML
     public void handleInstallSamba(){
         //sshManager = (SshManager)springXmlAppContext.getBean("ssh-manager");
@@ -154,6 +163,7 @@ public class MainFrameController implements Initializable{
         Configurator.getNixInstaller().install();
     }
 
+    // TODO Доделать
     private void provideAboutFunctionality(){
         System.out.println("You clicked on About!");
     }
